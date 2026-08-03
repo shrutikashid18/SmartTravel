@@ -307,23 +307,6 @@ document.getElementById("tReview").innerHTML=testimonials[current].review;
 setInterval(changeReview,3000);
 
 </script>
-  // =============================
-// Load Destinations From Firebase
-// =============================
-
-const destinationContainer = document.getElementById("destinationList");
-
-database.ref("Destinations").on("value", (snapshot) => {
-
-    if (!destinationContainer) return;
-
-    destinationContainer.innerHTML = "";
-
-    snapshot.forEach((child) => {
-
-        const data = child.val();
-
-        destinationContainer.innerHTML += `
         <div class="card bg-white rounded-xl overflow-hidden">
 
             <img src="${data.image}" alt="${data.name}">
@@ -351,4 +334,76 @@ database.ref("Destinations").on("value", (snapshot) => {
     });
 
 });
-  
+  // =======================
+// Contact Form
+// =======================
+
+function sendMessage() {
+
+const name = document.getElementById("name").value;
+const email = document.getElementById("contactEmail").value;
+const message = document.getElementById("message").value;
+
+if(name=="" || email=="" || message==""){
+alert("Please fill all fields.");
+return;
+}
+
+database.ref("Messages").push({
+name:name,
+email:email,
+message:message,
+date:new Date().toLocaleString()
+});
+
+alert("Message Sent Successfully!");
+
+document.getElementById("name").value="";
+document.getElementById("contactEmail").value="";
+document.getElementById("message").value="";
+
+}
+// =======================
+// Contact Form
+// =======================
+
+function sendMessage() {
+
+const name = document.getElementById("name").value;
+const email = document.getElementById("contactEmail").value;
+const message = document.getElementById("message").value;
+
+if(name=="" || email=="" || message==""){
+alert("Please fill all fields.");
+return;
+}
+
+database.ref("Messages").push({
+name:name,
+email:email,
+message:message,
+date:new Date().toLocaleString()
+});
+
+alert("Message Sent Successfully!");
+
+document.getElementById("name").value="";
+document.getElementById("contactEmail").value="";
+document.getElementById("message").value="";
+
+}
+  <input id="name" type="text" placeholder="Your Name">
+
+<input id="contactEmail" type="email" placeholder="Your Email">
+
+<textarea id="message" placeholder="Message"></textarea>
+
+<button onclick="sendMessage()">
+Send Message
+</button>
+ 
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="RPO8d7OWrMJBnEX8B0RCo";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
