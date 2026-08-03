@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Smart Travel - Explore The World</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 html{
 scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
 }
 
 .hero{
@@ -31,13 +38,16 @@ transition:.4s;
 transform:translateY(-10px);
 box-shadow:0 20px 40px rgba(0,0,0,.2);
 }
+
+img{
+width:100%;
+display:block;
+}
 </style>
 
 </head>
 
 <body class="bg-gray-100">
-
-<!-- HEADER -->
 
 <header class="fixed top-0 w-full bg-white shadow-lg z-50">
 
@@ -74,7 +84,8 @@ class="absolute -top-3 -right-3 bg-red-500 text-white rounded-full px-2 text-xs"
 
 </div>
 
-<button class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700">
+<button onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})"
+class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700">
 Book Now
 </button>
 
@@ -83,8 +94,6 @@ Book Now
 </div>
 
 </header>
-
-<!-- HERO -->
 
 <section
 id="home"
@@ -97,17 +106,19 @@ Explore The World With Us
 </h2>
 
 <p class="text-xl mb-8">
-Discover 200+ Destinations Across 7 Continents
+Discover Amazing Destinations Across The World
 </p>
 
 <div class="bg-white rounded-full p-2 flex max-w-xl mx-auto">
 
 <input
+id="searchInput"
 type="text"
 placeholder="Where do you want to go?"
 class="flex-1 px-5 py-3 rounded-full outline-none text-black">
 
 <button
+onclick="searchPlace()"
 class="bg-blue-600 text-white px-8 rounded-full">
 Search
 </button>
@@ -117,42 +128,31 @@ Search
 </div>
 
 </section>
-
 <!-- DESTINATIONS -->
 
-<section
-id="destinations"
-class="py-20 max-w-7xl mx-auto px-5">
+<section id="destinations" class="py-20 max-w-7xl mx-auto px-5">
 
 <h2 class="text-4xl font-bold text-center mb-12">
-
 Popular Destinations
-
 </h2>
 
-<div class="grid md:grid-cols-3 gap-8">
+<div id="destinationList" class="grid md:grid-cols-3 gap-8">
 
-<!-- CARD 1 -->
-
+<!-- Paris -->
 <div class="card bg-white rounded-xl overflow-hidden">
 
 <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80">
 
 <div class="p-5">
 
-<h3 class="text-2xl font-bold">
-Paris
-</h3>
+<h3 class="text-2xl font-bold">Paris</h3>
 
-<p class="text-gray-600 mt-2">
-Eiffel Tower • France
-</p>
+<p class="text-gray-600 mt-2">Eiffel Tower • France</p>
 
-<p class="text-blue-600 font-bold mt-2">
-From $899
-</p>
+<p class="text-blue-600 font-bold mt-2">$899</p>
 
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
+<button onclick="showDetails('Paris','France','Starting Price: $899')"
+class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
 View Details
 </button>
 
@@ -160,27 +160,21 @@ View Details
 
 </div>
 
-<!-- CARD 2 -->
-
+<!-- Bali -->
 <div class="card bg-white rounded-xl overflow-hidden">
 
 <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80">
 
 <div class="p-5">
 
-<h3 class="text-2xl font-bold">
-Bali
-</h3>
+<h3 class="text-2xl font-bold">Bali</h3>
 
-<p class="text-gray-600 mt-2">
-Indonesia Paradise
-</p>
+<p class="text-gray-600 mt-2">Indonesia</p>
 
-<p class="text-blue-600 font-bold mt-2">
-From $699
-</p>
+<p class="text-blue-600 font-bold mt-2">$699</p>
 
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
+<button onclick="showDetails('Bali','Indonesia','Starting Price: $699')"
+class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
 View Details
 </button>
 
@@ -188,111 +182,21 @@ View Details
 
 </div>
 
-<!-- CARD 3 -->
-
+<!-- Switzerland -->
 <div class="card bg-white rounded-xl overflow-hidden">
 
 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">
 
 <div class="p-5">
 
-<h3 class="text-2xl font-bold">
-Switzerland
-</h3>
+<h3 class="text-2xl font-bold">Switzerland</h3>
 
-<p class="text-gray-600 mt-2">
-Snow Mountains
-</p>
+<p class="text-gray-600 mt-2">Snow Mountains</p>
 
-<p class="text-blue-600 font-bold mt-2">
-From $1299
-</p>
+<p class="text-blue-600 font-bold mt-2">$1299</p>
 
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
-View Details
-</button>
-
-</div>
-
-</div>
-
-<!-- CARD 4 -->
-
-<div class="card bg-white rounded-xl overflow-hidden">
-
-<img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80">
-
-<div class="p-5">
-
-<h3 class="text-2xl font-bold">
-Dubai
-</h3>
-
-<p class="text-gray-600 mt-2">
-Luxury City
-</p>
-
-<p class="text-blue-600 font-bold mt-2">
-From $999
-</p>
-
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
-View Details
-</button>
-
-</div>
-
-</div>
-
-<!-- CARD 5 -->
-
-<div class="card bg-white rounded-xl overflow-hidden">
-
-<img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80">
-
-<div class="p-5">
-
-<h3 class="text-2xl font-bold">
-Tokyo
-</h3>
-
-<p class="text-gray-600 mt-2">
-Japan
-</p>
-
-<p class="text-blue-600 font-bold mt-2">
-From $1099
-</p>
-
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
-View Details
-</button>
-
-</div>
-
-</div>
-
-<!-- CARD 6 -->
-
-<div class="card bg-white rounded-xl overflow-hidden">
-
-<img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80">
-
-<div class="p-5">
-
-<h3 class="text-2xl font-bold">
-Maldives
-</h3>
-
-<p class="text-gray-600 mt-2">
-Luxury Water Villas
-</p>
-
-<p class="text-blue-600 font-bold mt-2">
-From $1599
-</p>
-
-<button class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
+<button onclick="showDetails('Switzerland','Europe','Starting Price: $1299')"
+class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
 View Details
 </button>
 
@@ -302,445 +206,149 @@ View Details
 
 </div>
 
-</section>
-
-<!-- PART 2 STARTS FROM HERE -->
-  <!-- PACKAGES -->
-
-<section id="packages" class="bg-white py-20">
-
-<div class="max-w-7xl mx-auto px-5">
-
-<h2 class="text-4xl font-bold text-center mb-12">
-Best Selling Packages
-</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<!-- Package 1 -->
-
-<div class="bg-blue-50 rounded-xl shadow-lg p-6 text-center">
-
-<h3 class="text-2xl font-bold">
-Europe Explorer
-</h3>
-
-<p class="mt-3">
-7 Days • 6 Nights
-</p>
-
-<p class="text-gray-600 mt-2">
-Paris • Rome • Switzerland
-</p>
-
-<div class="text-yellow-500 text-xl mt-3">
-★★★★★
-</div>
-
-<p class="text-3xl text-blue-600 font-bold mt-3">
-$1999
-</p>
-
-<button onclick="wishlist()"
-class="mt-5 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700">
-❤ Add To Wishlist
-</button>
-
-</div>
-
-<!-- Package 2 -->
-
-<div class="bg-blue-50 rounded-xl shadow-lg p-6 text-center">
-
-<h3 class="text-2xl font-bold">
-Asia Adventure
-</h3>
-
-<p class="mt-3">
-7 Days • 6 Nights
-</p>
-
-<p class="text-gray-600 mt-2">
-Bali • Tokyo • Singapore
-</p>
-
-<div class="text-yellow-500 text-xl mt-3">
-★★★★★
-</div>
-
-<p class="text-3xl text-blue-600 font-bold mt-3">
-$1499
-</p>
-
-<button onclick="wishlist()"
-class="mt-5 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700">
-❤ Add To Wishlist
-</button>
-
-</div>
-
-<!-- Package 3 -->
-
-<div class="bg-blue-50 rounded-xl shadow-lg p-6 text-center">
-
-<h3 class="text-2xl font-bold">
-Island Paradise
-</h3>
-
-<p class="mt-3">
-7 Days • 6 Nights
-</p>
-
-<p class="text-gray-600 mt-2">
-Maldives • Phuket • Bali
-</p>
-
-<div class="text-yellow-500 text-xl mt-3">
-★★★★★
-</div>
-
-<p class="text-3xl text-blue-600 font-bold mt-3">
-$1799
-</p>
-
-<button onclick="wishlist()"
-class="mt-5 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700">
-❤ Add To Wishlist
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- GALLERY -->
-
-<section id="gallery" class="py-20 bg-gray-100">
-
-<div class="max-w-7xl mx-auto px-5">
-
-<h2 class="text-4xl font-bold text-center mb-12">
-Travel Gallery
-</h2>
-
-<div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=600&q=80">
-
-<img class="rounded-xl shadow-lg hover:scale-105 duration-300"
-src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PART 3 STARTS FROM HERE -->
-  
-<!-- TESTIMONIALS -->
-
-<section class="py-20 bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
-
-<div class="max-w-5xl mx-auto text-center px-5">
-
-<h2 class="text-4xl font-bold mb-10">
-What Our Travelers Say
-</h2>
-
-<div id="testimonial" class="bg-white text-gray-800 rounded-xl shadow-xl p-8">
-
-<h3 id="tName" class="text-2xl font-bold">
-Emma Johnson
-</h3>
-
-<p id="tCountry" class="text-blue-600 mt-2">
-United Kingdom
-</p>
-
-<p id="tReview" class="mt-5 text-lg">
-Amazing experience! Everything was perfectly organized. Highly recommended.
-</p>
-
-<div class="text-yellow-500 text-2xl mt-5">
-★★★★★
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- NEWSLETTER -->
-
-<section class="py-20 bg-white">
-
-<div class="max-w-3xl mx-auto text-center px-5">
-
-<h2 class="text-4xl font-bold">
-Get Travel Deals To Your Inbox
-</h2>
-
-<p class="text-gray-600 mt-4">
-Subscribe for exclusive discounts and travel offers.
-</p>
-
-<div class="mt-8 flex flex-col md:flex-row gap-4 justify-center">
-
-<input
-id="email"
-type="email"
-placeholder="Enter your email"
-class="border rounded-full px-6 py-3 w-full md:w-96 outline-none">
-
-<button
-onclick="subscribe()"
-class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700">
-
-Subscribe
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact" class="py-20 bg-gray-100">
-
-<div class="max-w-6xl mx-auto px-5">
-
-<h2 class="text-4xl font-bold text-center mb-10">
-Contact Us
-</h2>
-
-<div class="grid md:grid-cols-2 gap-10">
-
-<div>
-
-<h3 class="text-2xl font-bold mb-5">
-Reach Us
-</h3>
-
-<p class="mb-3">
-📍 New York, USA
-</p>
-
-<p class="mb-3">
-📧 info@smarttravel.com
-</p>
-
-<p>
-📞 +1 987 654 3210
-</p>
-
-</div>
-
-<div>
-
-<input
-type="text"
-placeholder="Your Name"
-class="w-full border rounded-lg p-3 mb-4">
-
-<input
-type="email"
-placeholder="Your Email"
-class="w-full border rounded-lg p-3 mb-4">
-
-<textarea
-rows="5"
-placeholder="Message"
-class="w-full border rounded-lg p-3"></textarea>
-
-<button
-class="mt-5 bg-blue-600 text-white px-8 py-3 rounded-full">
-
-Send Message
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="bg-gray-900 text-white py-12">
-
-<div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-5">
-
-<div>
-
-<h3 class="text-2xl font-bold mb-4">
-Smart Travel
-</h3>
-
-<p>
-Explore amazing destinations around the world with premium travel experiences.
-</p>
-
-</div>
-
-<div>
-
-<h3 class="text-xl font-bold mb-4">
-Quick Links
-</h3>
-
-<p>Home</p>
-
-<p>Destinations</p>
-
-<p>Packages</p>
-
-<p>Gallery</p>
-
-</div>
-
-<div>
-
-<h3 class="text-xl font-bold mb-4">
-Contact
-</h3>
-
-<p>Email: info@smarttravel.com</p>
-
-<p>Phone: +1 9876543210</p>
-
-<p>Open: 24/7</p>
-
-</div>
-
-<div>
-
-<h3 class="text-xl font-bold mb-4">
-Follow Us
-</h3>
-
-<div class="flex gap-4 text-2xl">
-
-<i class="fab fa-facebook"></i>
-
-<i class="fab fa-instagram"></i>
-
-<i class="fab fa-x-twitter"></i>
-
-<i class="fab fa-youtube"></i>
-
-</div>
-
-</div>
-
-</div>
-
-<p class="text-center text-gray-400 mt-10">
-© 2026 Smart Travel. All Rights Reserved.
-</p>
-
-</footer>
-
-<script>
-
-// Wishlist Counter
-let count = 0;
-
-function wishlist() {
-    count++;
-    document.getElementById("wish").innerText = count;
-}
-
-// Newsletter Subscribe
-function subscribe() {
-    const email = document.getElementById("email").value.trim();
-
-    if (email === "") {
-        alert("Please enter your email.");
-        return;
-    }
-
-    alert("🎉 Subscribed Successfully!\nThank you for joining Smart Travel.");
-    document.getElementById("email").value = "";
-}
-
-// Testimonials Slider
-const testimonials = [
-{
-name: "Emma Johnson",
-country: "United Kingdom",
-review: "Amazing experience! Everything was perfectly organized. Highly recommended."
-},
-{
-name: "Rahul Sharma",
-country: "India",
-review: "Affordable packages, beautiful hotels and excellent customer service."
-},
-{
-name: "Sophia Brown",
-country: "Australia",
-review: "One of the best travel agencies. Everything was smooth from booking to return."
-}
-];
-
-let current = 0;
-
-function changeReview(){
-
-current = (current + 1) % testimonials.length;
-
-document.getElementById("tName").innerHTML =
-testimonials[current].name;
-
-document.getElementById("tCountry").innerHTML =
-testimonials[current].country;
-
-document.getElementById("tReview").innerHTML =
-testimonials[current].review;
-
-}
-
-setInterval(changeReview,3000);
+  </section>
+ <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-  const firebaseconfig = {
- apiKey: "AIzaSyAnOkq8ZaTEX9qCQSqs0-GZMtYRQvzh108",
+<script>
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAnOkq8ZaTEX9qCQSqs0-GZMtYRQvzh108",
   authDomain: "smart-7d1ca.firebaseapp.com",
   databaseURL: "https://smart-7d1ca-default-rtdb.firebaseio.com",
   projectId: "smart-7d1ca",
   storageBucket: "smart-7d1ca.firebasestorage.app",
   messagingSenderId: "481886024181",
-  appId: "1:481886024181:web:b3bc4fca8c0212ce3270bc"};
+  appId: "1:481886024181:web:b3bc4fca8c0212ce3270bc"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Wishlist
+let count = 0;
+function wishlist(){
+    count++;
+    document.getElementById("wish").innerText = count;
+}
+
+// Search
+function searchPlace(){
+    const place = document.getElementById("searchInput").value.trim();
+
+    if(place===""){
+        alert("Please enter a destination.");
+        return;
+    }
+
+    alert("Searching for: " + place);
+}
+
+// View Details
+function showDetails(name,country,price){
+    alert(
+        "Destination : " + name +
+        "\nCountry : " + country +
+        "\n" + price
+    );
+}
+
+// Newsletter
+function subscribe(){
+    const email=document.getElementById("email").value;
+
+    if(email==""){
+        alert("Enter Email");
+        return;
+    }
+
+    database.ref("Subscribers").push({
+        email:email
+    });
+
+    alert("Subscribed Successfully!");
+
+    document.getElementById("email").value="";
+}
+
+// Testimonials
+const testimonials=[
+{
+name:"Emma Johnson",
+country:"United Kingdom",
+review:"Amazing experience!"
+},
+{
+name:"Rahul Sharma",
+country:"India",
+review:"Affordable packages."
+},
+{
+name:"Sophia Brown",
+country:"Australia",
+review:"Excellent customer service."
+}
+];
+
+let current=0;
+
+function changeReview(){
+
+current=(current+1)%testimonials.length;
+
+document.getElementById("tName").innerHTML=testimonials[current].name;
+document.getElementById("tCountry").innerHTML=testimonials[current].country;
+document.getElementById("tReview").innerHTML=testimonials[current].review;
+
+}
+
+setInterval(changeReview,3000);
+
 </script>
-</body>
-</html>
+  // =============================
+// Load Destinations From Firebase
+// =============================
+
+const destinationContainer = document.getElementById("destinationList");
+
+database.ref("Destinations").on("value", (snapshot) => {
+
+    if (!destinationContainer) return;
+
+    destinationContainer.innerHTML = "";
+
+    snapshot.forEach((child) => {
+
+        const data = child.val();
+
+        destinationContainer.innerHTML += `
+        <div class="card bg-white rounded-xl overflow-hidden">
+
+            <img src="${data.image}" alt="${data.name}">
+
+            <div class="p-5">
+
+                <h3 class="text-2xl font-bold">${data.name}</h3>
+
+                <p class="text-gray-600 mt-2">${data.country}</p>
+
+                <p class="text-blue-600 font-bold mt-2">${data.price}</p>
+
+                <button
+                onclick="showDetails('${data.name}','${data.country}','${data.price}')"
+                class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
+
+                View Details
+
+                </button>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+});
+  
